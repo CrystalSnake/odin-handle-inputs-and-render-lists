@@ -29,6 +29,14 @@ class App extends Component {
     });
   };
 
+  onDeleteTask = (e) => {
+    const idForRemove = e.target.closest('li').dataset.id;
+    const tasks = this.state.tasks.filter((task) => task.id !== idForRemove);
+    this.setState({
+      tasks: tasks,
+    });
+  };
+
   render() {
     const { task, tasks } = this.state;
 
@@ -44,7 +52,7 @@ class App extends Component {
           />
           <button type="submit">Add Task</button>
         </form>
-        <Overview tasks={tasks} />
+        <Overview tasks={tasks} handleDelete={this.onDeleteTask} />
       </div>
     );
   }
